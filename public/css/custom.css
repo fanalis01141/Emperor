@@ -1,0 +1,82 @@
+.roboto{
+    font-family: 'Roboto Slab', serif;
+
+}
+.mon{
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.satisfy{
+    font-family: 'Satisfy', cursive;
+    font-size:20px;
+}
+
+
+.bg-yellow{
+    background-color: white;
+}
+.bg-green{
+    background-color: #295f2d; 
+}
+.bg-lblue{
+    background-color: #1c819e; 
+}
+.lblue{
+    color: #1c819e; 
+}
+
+
+
+.bg-greyzz{
+    background-color: #6e6e6efa; 
+}
+.bg-red{
+    background-color: #d42727; 
+}
+
+.lobster{
+    font-family: 'Lobster', cursive;
+}
+
+.mt-100{
+    margin-top: 100px;
+}
+
+.pink{
+    background-color:#110133;
+}
+.orange{
+    background-color:#f6993f;
+}
+
+.red{
+    color: #d42727;
+}
+
+.green{
+    color: #295f2d;
+}
+
+hr.new4 {
+    border: 2px solid #295f2d;
+  }
+
+  .disabled-btn{
+    pointer-events: none;
+  }
+
+.bl{
+    width: 400px;
+}
+
+.bl2{
+    width: 200px;
+}
+
+
+
+.timer{
+    display: inline-block;
+    line-height: 1;
+}
