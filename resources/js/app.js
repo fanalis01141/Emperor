@@ -31,7 +31,6 @@ const app = new Vue({
     el: '#app',
 });
 
-
 $('#edit_type').on('show.bs.modal', function(event){
     var button = $(event.relatedTarget)
     var type = button.data('type')
@@ -155,6 +154,41 @@ $('#delete_room').on('show.bs.modal', function(event){
 });
 
 
+$('#extend').on('show.bs.modal', function(event){
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var room = button.data('room')
+
+
+
+    console.log(id)
+    $("#roomspan").text(room)
+    $("#id").val(id);
+    $("#room").val(room);
+
+
+});
+$(".checkout").click(function(){
+    // var timeleft =  $(this).closest("tr").find('.tss').text();
+    // $("#timeleft").val(timeleft);
+    // console.log(timeleft);
+});
+
+$('#checkout').on('show.bs.modal', function(event){
+
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var room = button.data('room')
+    var timeleft =  button.closest("tr").find('.tss').text();
+
+    $("#id_checkout").val(id);
+    $("#room_checkout").val(room);
+    $("#roomc").text(room + "?");
+    $("#timeleft").text("Room " + room + " has " + (timeleft).toUpperCase());
+
+    console.log(timeleft)
+});
+
 
 $("#hours").change(function(){
     var value = $("#hours").val();
@@ -174,9 +208,13 @@ $("#hours").change(function(){
 
 $(document).ready(function() {
     makeTimer();
+    getCard();
+
+    
+
+
 
     $(".btn-room").click(function(){
-
         $("#hours").empty();
         var divp = document.getElementById('div-picked');
         divp.style.display = 'block';
@@ -190,9 +228,14 @@ $(document).ready(function() {
         document.getElementById('room_numberrr').innerHTML = number;
     
         $.get('/ajax-room?id=' + id,function(data){
-            $("#hours").append('<option value="3"> P '+data[0].amount3+'.00 / 3 Hours</option>'+
-            '<option value="12"> P '+data[0].amount12+'.00 / 12 Hours</option>'+
-            '<option value="24"> P '+data[0].amount24+'.00 / 24 Hours</option>');
+            $("#hours").append('<option value="NONE" selected disabled> Please wait... </option>');
+            setTimeout(function(){ 
+                $("#hours").empty();
+                $("#hours").append('<option selected disabled > - Select Hours and Amount - </option>'+
+                '<option value="3"> P '+data[0].amount3+'.00 / 3 Hours</option>'+
+                '<option value="12"> P '+data[0].amount12+'.00 / 12 Hours</option>'+
+                '<option value="24"> P '+data[0].amount24+'.00 / 24 Hours</option>')
+            }, 1000);
         });
     
         var value = $("#hours").val();
@@ -203,15 +246,12 @@ $(document).ready(function() {
         $("#amount").val(finalAmount);
     });
 
-
     display = document.querySelector('#time');
 
     function makeTimer() {
         $("#table tr.item").each(function() {
             var ROOMid = $(this).find("#row_id").text();
-            var checker = $(this).find("#checker").text();
             var divtimer = $(this).find("#tss");
-            var setcheck =  $(this).find("#checker")
 
             var modalIsOpen = false
             $('#timeout').on('shown.bs.modal', function(e) { modalIsOpen = true;})
@@ -229,30 +269,92 @@ $(document).ready(function() {
                 var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
                 var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
             
-                if(days == 0 && hours == 0 && 1 > minutes){
-                    divtimer.text("TIME OUT kunu");
-                }else if(0 > days){
-                    divtimer.text("TIME OUT");
-                    $("#timeout").modal('show');
-                }else{
+                if(days == 0 && hours < 1){
+                    divtimer.text(minutes + " mins left.");
+                }else if(0 == days && hours <= 23){
                     divtimer.text(hours + " Hours " + minutes + " minutes left.");
+                }else if(0 == days && hours == 0){
+                    divtimer.text(minutes + " minutes left.");
+                }else if(0 == days && hours == 0 && minutes == 0 && seconds <= 59){
+                    divtimer.text(seconds + " left.");
+                }else if(0>days){
+                    divtimer.text("No time left.");
+                }else{
+                    divtimer.text(days + " days " + hours + " Hours " + minutes + " minutes left.");
                 }
             });
         });
         
     }
-    setInterval(makeTimer, 600000);
 
-    function runModal(){
-        var modalIsOpen = false
-        $('#timeout').on('shown.bs.modal', function(e) { modalIsOpen = true;})
-        $('#timeout').on('hidden.bs.modal', function(e) { modalIsOpen = false;})
+    setInterval(makeTimer, 60000);
 
-        if(!modalIsOpen){
-            $("#timeout").modal('show');
-        }else{
-            $("#timeout").modal('hide');
-        }
+    function getCard(){
+        $(".colmd1").each(function(){
+            var title = $(this).find(".roomT").text();
+            var timer = $(this).find('.smalltime');
+            var bg = $(this).find('.cardbg');
+
+            $.get('/get-card-time?room=' + title,function(data){
+
+                console.log(data['time'].length);
+                if(data['time'].length > 0){
+
+                    var hms = data['time'][0].time_out + " GMT+08:00";
+                    var endTime = new Date(hms);			
+                    endTime = (Date.parse(endTime) / 1000);
+                    var now = new Date();
+                    now = (Date.parse(now) / 1000);
+                    var timeLeft = endTime - now;
+                    var days = Math.floor(timeLeft / 86400); 
+                    var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+                    var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+                    var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+    
+                
+                    if(days == 0 && hours <= 1){
+                        timer.text(minutes + " mins left.");
+                        $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
+                    }else if(0 > days){
+                        timer.text("No time left.");
+                        $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
+                        $("#timeout").modal('show');
+                    }else{
+                        timer.text(days + " days " + hours + " hrs " + minutes + " mins.");
+                    }
+    
+                    if(days == 0 && hours < 1){
+                        timer.text(minutes + " mins left.");
+                    }else if(0 == days && hours <= 23){
+                        timer.text(hours + " Hours " + minutes + " minutes left.");
+                    }else if(0 == days && hours == 0){
+                        timer.text(minutes + " minutes left.");
+                    }else if(0 == days && hours == 0 && minutes == 0 && seconds <= 59){
+                        timer.text("No time left.");
+                        $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
+                        $("#timeout").modal('show');
+                    }else if(0>days){
+                        timer.text("No time left.");
+                        $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
+                        $("#timeout").modal('show');
+                    }else{
+                        timer.text(days + " days " + hours + " Hours " + minutes + " minutes left.");
+                    }
+    
+                    if(data['rooms'][0].avail == 'NO'){
+                        bg.removeClass('bg-success');
+                        bg.addClass('bg-danger');
+                    }else{
+                        bg.addClass('bg-success');
+                        bg.removeClass('bg-danger');
+                    }
+                }
+                
+
+            });
+        });
     }
+    setInterval(getCard, 60000);
+
 });
 

@@ -51,10 +51,9 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        if($request->roomid == null || $request->roomid == ""){
-            return back()->withErrors('Oops, no room has been selected.');
+        if($request->roomid == null || $request->roomid == "" || $request->check_in_hours == null ){
+            return back()->withErrors('Oops, no room and check-in time has been selected.');
         }
-
         $date=  Carbon::now('Asia/Manila');
         $time_now = ($date->format("H:i"));
         $date_time_now = ($date->format("Y-m-d H:i:s"));
@@ -76,7 +75,7 @@ class CustomerController extends Controller
         $amount_pax =  50 * $request->pax;
         $amount_blanket = 20 * $request->blanket; 
         $final_amt = $amount_foam + $amount_towel + $amount_pax + $amount_blanket + $request->amount;
-        
+
         
         $room = Room::where('id', $request->roomid)->first();
         Customer::create([
@@ -97,12 +96,19 @@ class CustomerController extends Controller
             'total' => $final_amt,
             'status' => 'IN'
         ]);
-
+            
         Room::where('id', $request->roomid)->update([
             'avail' => 'NO'
         ]);
+        //return values
+        $data = array();
+        $data['customer'] = $request->name;
+        $data['roomz'] = $request->roomz;        
+        $data['assistant'] = $request->assistant;
+        $data['final_amt'] = $final_amt;
+                
+        return view('success', compact('data'));
 
-        return redirect()->route('customer.success');
     }
 
     /**
@@ -136,7 +142,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        return $request;
     }
 
     /**
@@ -152,5 +158,68 @@ class CustomerController extends Controller
 
     public function showSuccess(){
         return view('success');
+    }
+    public function edits(Request $request){
+        // return $request;
+        $customer = Customer::where('id', $request->id)->first();
+        $new_checkin_hrs = $customer->check_in_hrs + $request->hours;
+        
+        $minutes_to_add = $request->hours * 60;
+        
+        //get the timeout of customer and add extend
+        $carbon_date = Carbon::parse($customer->time_out);
+        $string_time = $carbon_date->addMinutes($minutes_to_add);
+        $updated_timeout = ($string_time->format("d F Y H:i:s"));
+
+        $new_foam = 50 * $request->foam;
+        $new_pax =  50 * $request->pax;
+        $new_blanket = 20 * $request->blanket;
+        $new_towel = 10* $request->towel;
+        $extend_cost = $request->hours * 50;
+        $added_costs = $new_foam + $new_pax + $new_towel + $new_blanket + $extend_cost;
+        $updated_total = $customer->total + $added_costs;
+
+
+        //return values
+        $data = array();
+        $data['foam'] = $request->foam > 0 ? $request->foam : 0;
+        $data['blanket'] = $request->blanket > 0 ? $request->blanket : 0;
+        $data['pax'] = $request->pax > 0 ? $request->pax : 0;
+        $data['towel'] = $request->towel > 0 ? $request->towel : 0;
+        $data['added_costs'] = $added_costs;
+        $data['hours'] = $request->hours;
+
+
+        Customer::where('id', $request->id)->update([
+            'check_in_hrs' => $new_checkin_hrs,
+            'time_out' => $updated_timeout,
+            'foam' => $request->foam,
+            'pax' => $request->pax,
+            'towel' => $request->towel,
+            'blanket' => $request->blanket,
+            'total' => $updated_total
+        ]);
+
+        return view('extended',compact('data'));
+    }
+
+    public function checkout(Request $request){
+        Customer::where('id', $request->id_checkout)->update([
+            'status' => 'OUT'
+        ]);
+
+        Room::where('room_num',$request->room_checkout)->update([
+            'avail' => 'YES'
+        ]);
+
+        $customer = Customer::where('id',$request->id_checkout)->first();
+
+        //return values
+
+        $room = $request->room_checkout;
+        $name = $customer->name;
+        $total = $customer->total;
+
+        return view('checkout',compact('room','name','total'));
     }
 }

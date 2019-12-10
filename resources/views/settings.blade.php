@@ -4,10 +4,12 @@
     
     <div class="container-fluid">
         <div class="float-left">
-            <a href="{{route('home')}}" class="btn btn-primary">
+            <a href="{{route('home')}}" class="btn btn-primary button">
                 <i class="fa fa-home fa-2x mr-4" aria-hidden="true"></i>Home
             </a>
         </div>
+
+        
         <div class="text-center">
             <h1 class="mon font-weight-bold green" style="font-size:60px">
                 <i class="fa fa-cogs green" aria-hidden="true"></i>
@@ -38,7 +40,7 @@
                     <div class="d-flex justify-content-between">
                         <i class="fas fa-door-open mt-1 ml-3 fa-2x green "></i>
                         <h3 class="green ml-3 mt-1 font-weight-bold ">Rooms:</h3>
-                        <button class="btn btn-success float-right" data-toggle="modal" data-target="#add_room">
+                        <button class="btn btn-success float-right button" data-toggle="modal" data-target="#add_room">
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
                         </button>
                     </div>

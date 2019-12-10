@@ -10,9 +10,11 @@
         <div class="col-md-6">
             <p class="display-3">Great! </p>
             <p class="display-4">
-                You can now call {{$data['assistant']}} to assist them to room <u>{{$data['roomz']}}</u>.
-                <br><br>
-                Don't forget to ask for the payment amount of : P {{$data['final_amt']}}.00 
+
+                You have checked-out {{$name}} from room {{$room}}.
+
+                The total cost of {{$name}}'s stay is P {{$total}}.00
+                
             </p>
 
             <a href="{{route('home')}}" class="btn btn-outline-secondary">

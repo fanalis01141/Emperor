@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="text-left">
+            <a href="{{route('home')}}" class="btn btn-outline-secondary">Home</a>
+        </div>
         <div class="text-center">
             <h3 class="mon font-weight-bold green" style="font-size:60px">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -76,7 +79,6 @@
                                 <p class="mt-3">Number of hours of check-in:</p>
                                 <div class="text-center d-flex justify-content-center">
                                     <select name="hours" id="hours" class="form-control" style="width:250px">
-                                        <option value="NONE" disabled selected>— Select Hours of Check-in —</option>
                                     </select>
                                 </div>
                             </div>

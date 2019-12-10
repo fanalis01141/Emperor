@@ -14,13 +14,7 @@
 
         <!-- Styles -->
         <style>
-
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
+             .flex-center {
                 align-items: center;
                 display: flex;
                 justify-content: center;
@@ -44,6 +38,7 @@
                 font-size: 150px;
                 text-shadow: #171717 5px 5px;
                 color: #295f2d;
+                margin-top:100px;
             }
 
             .links > a {
@@ -58,20 +53,26 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
+            } 
         </style>
     </head> 
-    <body class="mon bg-yellow">
-        <div class="flex-center position-ref full-height mt-3">
+    <body class="mon" style="background-color:#fedc3d">
+
+        <div class="bg">
+        </div>
+
+        <div class="flex-center position-ref mt-3">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}" style="color:#295f2d">Home</a>
+                        <a href="{{ url('/home') }}"style="color:#66ab8c">Home</a>
                     @else
-                        <a href="{{ route('login') }}" style="color:#295f2d">Login</a>
+                       
+                    
+                    <a href="{{ route('login') }}" style="color:#66ab8c">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" style="color:#295f2d">Register</a>
+                            <a href="{{ route('register') }}" style="color:#66ab8c">Register</a>
                         @endif
                     @endauth
                 </div>
@@ -79,10 +80,15 @@
             
 
             <div class="content">
-                <div class="title m-b-md satisfy" style="color:#295f2d">
+
+                
+                <div class="title m-b-md " style="color:#66ab8c">
                     Emperor Pension House
-                    <img src="{{asset('img/love12.svg')}}" alt="">
                 </div>
+
+                <img src="{{asset('img/love12.svg')}}" alt="">
+
+                <img src="{{asset('img/love13.svg')}}" alt="">
             </div>
         </div>
     </body>

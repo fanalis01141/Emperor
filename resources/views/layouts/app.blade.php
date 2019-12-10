@@ -12,8 +12,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    {{-- <link rel="shortcut icon" href="{{ asset('img/Love.ico') }}"> --}}
 
     
     
@@ -26,12 +28,16 @@
     <link rel="stylesheet" href="{{asset('FA/css/solid.css')}}">
 
 
+
+
+
+
 </head>
 <body class="mon bg-yellow">
     <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-green shadow-sm text" >
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm  bg-green">
             <div class="container">
-                <a class="navbar-brand satisfy" href="{{ url('/') }}">
+                <a class="navbar-brand mon" href="{{ url('/') }}">
                     Emperor Pension House
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

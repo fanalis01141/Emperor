@@ -18,7 +18,7 @@ class SettingController extends Controller
     {
         $types = RoomType::all();
         $assists = Assistant::all();
-        $rooms = Room::all();
+        $rooms = Room::orderBy('room_num','asc')->get();
 
         return view('settings',compact('types','assists','rooms'));
     }
