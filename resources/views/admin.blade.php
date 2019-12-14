@@ -41,7 +41,7 @@
                 
 
                     <hr>
-                    <table class="table table-striped table-bordered text-center">
+                    <table class="table table-striped table-bordered text-center table-light">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Room</th>
@@ -101,7 +101,7 @@
                     {{-- <button onclick="search()" class="btn btn-primary" id="searchdate">Search</button> --}}
 
                     <hr>
-                    <table class="table table-striped table-bordered text-center">
+                    <table class="table table-striped table-bordered text-center table-light">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Gross</th>

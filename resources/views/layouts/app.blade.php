@@ -33,7 +33,7 @@
 
 
 </head>
-<body class="mon bg-yellow">
+<body class="mon bg-yellow bg">
     <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark shadow-sm  bg-green">
             <div class="container">

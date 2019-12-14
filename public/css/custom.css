@@ -141,9 +141,12 @@ hr.new4 {
 .bg {
 
   /* Center and scale the image nicely */
-  background-position: center;
+  background-image: url('../img/background.jpg');
+
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
+  /* background-size: 100% 100%; */
 }
 
 

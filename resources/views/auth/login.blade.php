@@ -71,12 +71,12 @@
             </div>
         </div>
 
-        <div class="row text-center">
+        {{-- <div class="row text-center">
             
                 <div class="col-md-6">
                     <img src="{{asset('img/login.svg')}}" alt="">
                 </div>
-            </div>
+            </div> --}}
     </div>
 </div>
 @endsection
