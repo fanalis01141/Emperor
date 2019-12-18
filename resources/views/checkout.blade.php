@@ -11,9 +11,9 @@
             <p class="display-3">Great! </p>
             <p class="display-4">
 
-                You have checked-out {{$name}} from room {{$room}}.
+                You have checked-out {{session('name')}} from room {{session('room')}}.
 
-                The total cost of {{$name}}'s stay is P {{$total}}.00
+                The total cost of {{session('name')}}'s stay is P {{session('total')}}.00
                 
             </p>
 

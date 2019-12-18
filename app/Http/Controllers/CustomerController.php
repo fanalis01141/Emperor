@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use DateTimeZone;
 use Illuminate\Http\Request;
-
-
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CustomerController extends Controller
 {
@@ -100,14 +99,15 @@ class CustomerController extends Controller
         Room::where('id', $request->roomid)->update([
             'avail' => 'NO'
         ]);
-        //return values
-        $data = array();
-        $data['customer'] = $request->name;
-        $data['roomz'] = $request->roomz;        
-        $data['assistant'] = $request->assistant;
-        $data['final_amt'] = $final_amt;
-                
-        return view('success', compact('data'));
+
+        session([
+            'assistant' => $request->assistant,
+            'roomz' => $request->roomz,
+            'final_amt' => $final_amt,
+        ]);
+
+        return redirect()->route('customer.success');
+
 
     }
 
@@ -156,9 +156,6 @@ class CustomerController extends Controller
         //
     }
 
-    public function showSuccess(){
-        return view('success');
-    }
     public function edits(Request $request){
         // return $request;
         $customer = Customer::where('id', $request->id)->first();
@@ -200,7 +197,18 @@ class CustomerController extends Controller
             'total' => $updated_total
         ]);
 
-        return view('extended',compact('data'));
+    
+        session([
+            'hours' => $request->hours,
+            'foam' => $request->foam,
+            'pax' => $request->pax,
+            'towel' => $request->towel,
+            'blanket' => $request->blanket,
+            'total' => $updated_total,
+            'added_costs' => $added_costs,
+        ]);
+
+        return redirect()->route('customer.extend');
     }
 
     public function checkout(Request $request){
@@ -214,12 +222,24 @@ class CustomerController extends Controller
 
         $customer = Customer::where('id',$request->id_checkout)->first();
 
-        //return values
+        session([
+            'room' =>  $request->room_checkout,
+            'name' => $customer->name,
+            'total' => $customer->total,
+        ]);
 
-        $room = $request->room_checkout;
-        $name = $customer->name;
-        $total = $customer->total;
+        return redirect()->route('customer.showcheckout');
+    }
 
-        return view('checkout',compact('room','name','total'));
+    public function showSuccess(){
+        return view('success');
+    }
+
+    public function showExtended(){
+        return view('extended');
+    }
+
+    public function showCheckout(){
+        return view('checkout');
     }
 }

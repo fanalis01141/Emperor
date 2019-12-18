@@ -10,9 +10,9 @@
         <div class="col-md-6">
             <p class="display-3">Great! </p>
             <p class="display-4">
-                You can now call {{$data['assistant']}} to assist them to room <u>{{$data['roomz']}}</u>.
+            You can now call {{ session('assistant') }} to assist them to room <u>{{session('roomz')}}</u>.
                 <br><br>
-                Don't forget to ask for the payment amount of : P {{$data['final_amt']}}.00 
+                Don't forget to ask for the payment amount of : P {{session('final_amt')}}.00 
             </p>
 
             <a href="{{route('home')}}" class="btn btn-outline-secondary">

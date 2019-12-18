@@ -41,12 +41,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('customer', 'CustomerController');
     
     Route::get('success-customer', 'CustomerController@showSuccess')->name('customer.success');
+    Route::get('extend-customer', 'CustomerController@showExtended')->name('customer.extend');
+    Route::get('checkout-customer', 'CustomerController@showCheckout')->name('customer.showcheckout');
+
     Route::post('edit-room/new-room', 'RoomController@editRoom')->name('room.editRoom');
     Route::post('delete/room', 'RoomController@deleteRoom')->name('room.deleteRoom');
     Route::post('edit-roomType/new-roomType', 'RoomTypeController@editRoomType')->name('roomType.editRoomType');
     Route::post('edit-assist/new-assist', 'AssistantController@editAssist')->name('room.editAssist');
     Route::post('edit-customer/new-edit', 'CustomerController@edits')->name('customer.edits');
-    Route::post('customer/check-out', 'CustomerController@checkout')->name('customer.checkout');
+    Route::post('checkout', 'CustomerController@checkout')->name('customer.checkout');
+
     Route::get('/new-customer', 'HomeController@addCustomer')->name('addCustomer');
     
     Route::get('/ajax-amount',function(){

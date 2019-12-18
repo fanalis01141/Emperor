@@ -49552,23 +49552,23 @@ $(document).ready(function () {
         var seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
 
         if (days == 0 && hours < 1) {
-          divtimer.text(minutes + " mins left.");
+          divtimer.text(minutes + "M");
         } else if (0 == days && hours <= 23) {
-          divtimer.text(hours + " Hours " + minutes + " minutes left.");
+          divtimer.text(hours + "H " + minutes + "M " + seconds + "S");
         } else if (0 == days && hours == 0) {
-          divtimer.text(minutes + " minutes left.");
+          divtimer.text(minutes + "M");
         } else if (0 == days && hours == 0 && minutes == 0 && seconds <= 59) {
           divtimer.text(seconds + " left.");
         } else if (0 > days) {
           divtimer.text("No time left.");
         } else {
-          divtimer.text(days + " days " + hours + " Hours " + minutes + " minutes left.");
+          divtimer.text(days + "D " + hours + "H " + minutes + "H");
         }
       });
     });
   }
 
-  setInterval(makeTimer, 60000);
+  setInterval(makeTimer, 30000);
 
   function getCard() {
     $(".colmd1").each(function () {
@@ -49602,11 +49602,11 @@ $(document).ready(function () {
           }
 
           if (days == 0 && hours < 1) {
-            timer.text(minutes + " mins left.");
+            timer.text(minutes + "M");
           } else if (0 == days && hours <= 23) {
-            timer.text(hours + " Hours " + minutes + " minutes left.");
+            timer.text(hours + "H " + minutes + "M ");
           } else if (0 == days && hours == 0) {
-            timer.text(minutes + " minutes left.");
+            timer.text(minutes + "M");
           } else if (0 == days && hours == 0 && minutes == 0 && seconds <= 59) {
             timer.text("No time left.");
             $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
@@ -49616,7 +49616,7 @@ $(document).ready(function () {
             $("#contenttt").text("Please be notified that room " + title + " that has timed out. Thank you!");
             $("#timeout").modal('show');
           } else {
-            timer.text(days + " days " + hours + " Hours " + minutes + " minutes left.");
+            timer.text(days + "D " + hours + "H " + minutes + "M");
           }
 
           if (data['rooms'][0].avail == 'NO') {
@@ -49631,7 +49631,7 @@ $(document).ready(function () {
     });
   }
 
-  setInterval(getCard, 60000);
+  setInterval(getCard, 30000);
 });
 
 /***/ }),
