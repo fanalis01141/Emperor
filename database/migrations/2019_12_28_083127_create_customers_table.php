@@ -30,6 +30,7 @@ class CreateCustomersTable extends Migration
             $table->integer('blanket');
             $table->integer('total');
             $table->string('status');
+            $table->string('encoded_by');
 
             $table->timestamps();
         });

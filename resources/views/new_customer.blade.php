@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="text-left">
-            <a href="{{route('home')}}" class="btn btn-outline-secondary">Home</a>
+            <a href="{{route('home')}}" class="btn btn-secondary">Home</a>
         </div>
         <div class="text-center">
             <h3 class="mon font-weight-bold green" style="font-size:60px">

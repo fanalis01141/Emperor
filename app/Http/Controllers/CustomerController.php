@@ -6,6 +6,7 @@ use App\Assistant;
 use App\Customer;
 use App\Room;
 use App\RoomType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use DateTimeZone;
@@ -93,7 +94,8 @@ class CustomerController extends Controller
             'pax' => $request->pax,
             'blanket' => $request->blanket,
             'total' => $final_amt,
-            'status' => 'IN'
+            'status' => 'IN',
+            'encoded_by' => Auth::user()->name
         ]);
             
         Room::where('id', $request->roomid)->update([

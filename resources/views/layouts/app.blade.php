@@ -23,6 +23,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/fonts.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('css/datepicker.min.css')}}">
+
     <link rel="stylesheet" href="{{asset('FA/css/fontawesome.css')}}">
     <link rel="stylesheet" href="{{asset('FA/css/brands.css')}}">
     <link rel="stylesheet" href="{{asset('FA/css/solid.css')}}">

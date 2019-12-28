@@ -419,7 +419,7 @@
                                 <label for="type" class="mt-3">Room Amount for <strong>3 hours</strong></label>
                                 <input type="text" name="amount3_ajax" id="amount3_ajax" class="form-control" placeholder="Enter amount for 3 hours." required>
                                 <label for="type" class="mt-3">Room Amount for <strong>12 hours</strong></label>
-                                <input type="text" name="amount12_ajax" id="amount12_ajax" class="form-control" placeholder="Enter amount for 12 hours." required><label for="type" class="mt-3">Room Amount:</label>
+                                <input type="text" name="amount12_ajax" id="amount12_ajax" class="form-control" placeholder="Enter amount for 12 hours." required>
                                 <label for="type" class="mt-3">Room Amount for <strong>24 hours</strong></label>
                                 <input type="text" name="amount24_ajax" id="amount24_ajax" class="form-control" placeholder="Enter amount for 24 hours." required>
                                 

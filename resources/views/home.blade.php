@@ -171,8 +171,13 @@
                                                 <a href="#" data-target="#extend" class="btn" data-toggle="modal" data-id="{{$c->id}}" data-room={{$c->room}}>
                                                     <i class="fa fa-plus-circle lblue fa-2x" aria-hidden="true" href="#"></i>
                                                 </a>
+                                                {{-- work here --}}
                                                 <a href="#" class="checkout btn" data-target="#checkout" data-toggle="modal" data-id="{{$c->id}}" data-room={{$c->room}}>
-                                                    <i class="fas fa-sign-out-alt red fa-2x ml-3    "></i>    
+                                                    <i class="fas fa-edit fa-2x " style="color:blueviolet"></i>    
+                                                </a>  
+                                                {{-- end --}}
+                                                <a href="#" class="checkout btn" data-target="#checkout" data-toggle="modal" data-id="{{$c->id}}" data-room={{$c->room}}>
+                                                    <i class="fas fa-sign-out-alt red fa-2x     "></i>    
                                                 </a>                                        
                                             </td>
                                         </tr>
