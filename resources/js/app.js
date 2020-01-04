@@ -206,6 +206,8 @@ $("#hours").change(function(){
 });
 
 
+
+
 $(document).ready(function() {
     makeTimer();
     getCard();

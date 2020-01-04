@@ -172,8 +172,8 @@
                                                     <i class="fa fa-plus-circle lblue fa-2x" aria-hidden="true" href="#"></i>
                                                 </a>
                                                 {{-- work here --}}
-                                                <a href="#" class="checkout btn" data-target="#checkout" data-toggle="modal" data-id="{{$c->id}}" data-room={{$c->room}}>
-                                                    <i class="fas fa-edit fa-2x " style="color:blueviolet"></i>    
+                                                <a class="checkout btn" href="{{route('customer.transfer', $c->id)}}">
+                                                    <i class="fas fa-exchange-alt fa-2x" style="color:blueviolet"></i>
                                                 </a>  
                                                 {{-- end --}}
                                                 <a href="#" class="checkout btn" data-target="#checkout" data-toggle="modal" data-id="{{$c->id}}" data-room={{$c->room}}>
@@ -376,6 +376,39 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    Add rows here
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        // Use above variables to manipulate the DOM
+        
+    });
+</script>
+
 
 
 <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true" data-backdrop="static">

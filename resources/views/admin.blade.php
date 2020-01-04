@@ -36,10 +36,15 @@
                 <div class="text-center">
 
                     <label for="date" class="f20px">Select Date:</label>
-                    <input type="date" name="date_search" id="date_search" class="inputzzz" value="{{date('Y-m-d')}}"> 
-                    <button onclick="search()" class="btn btn-primary" id="searchdate">Search</button>
-                
+                    <input type="date" name="date_search" id="date_search" class="inputzzz mr-3" value="{{date('Y-m-d')}}"> 
+                    <select name="" id="" class="inputzzz slct" required>
+                        @foreach ($users as $user)
+                            <option value="{{$user->name}}">{{$user->name}}</option>
+                        @endforeach
+                    </select>
 
+                    <button onclick="search()" class="btn btn-primary" id="searchdate">Search</button>
+                    <button class="btn btn-success" >Print</button>
                     <hr>
                     <table class="table table-striped table-bordered text-center table-light">
                         <thead class="thead-dark">
@@ -184,10 +189,13 @@ function search(){
     event.preventDefault()
     var div = document.getElementById('calculator');
     var date = $("#date_search").val();
+    var select = $(".slct").val();
+
+    alert(select);
     $("#bodysearch").html("");
     var total = 0;
     
-    $.get('/search?date=' + date, function(data){
+    $.get('/search?date=' + date + '&user=' + select, function(data){
         for(var i = 0; i < data.length; i++) {
             var obj = data[i];
             total = total + obj.total;

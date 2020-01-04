@@ -50,6 +50,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('edit-assist/new-assist', 'AssistantController@editAssist')->name('room.editAssist');
     Route::post('edit-customer/new-edit', 'CustomerController@edits')->name('customer.edits');
     Route::post('checkout', 'CustomerController@checkout')->name('customer.checkout');
+    Route::post('confirm-transfer/{id}', 'CustomerController@confirmTransfer')->name('customer.confirmTransfer');
+
+
+
+    Route::get('transfer/{id}', 'CustomerController@transfer')->name('customer.transfer');
+
 
     Route::get('/new-customer', 'HomeController@addCustomer')->name('addCustomer');
     
@@ -94,7 +100,9 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('search',function(){
         $date = Input::get('date');
-        $records = Customer::whereDate('created_at',$date)->get();
+        $user = Input::get('user');
+        
+        $records = Customer::whereDate('created_at',$date)->where('encoded_by', $user)->get();
         return Response::json($records);
     
     });

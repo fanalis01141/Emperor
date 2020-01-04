@@ -19,7 +19,8 @@ class AdminController extends Controller
     public function index()
     {
         $income = Income::orderBy('created_at','desc')->get();
-        return view('admin', compact('income'));
+        $users = User::all();
+        return view('admin', compact('income','users'));
     }
 
     /**

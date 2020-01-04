@@ -6,6 +6,7 @@ use App\Assistant;
 use App\Customer;
 use App\Room;
 use App\RoomType;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -243,5 +244,29 @@ class CustomerController extends Controller
 
     public function showCheckout(){
         return view('checkout');
+    }
+
+    public function transfer($id){
+        $rooms = Room::where('avail','YES')->orderBy('room_num','asc')->get();
+        return view('transfer',compact('rooms','id'));
+    }
+
+    public function confirmTransfer(Request $request, $id){
+        $c = Customer::where('id',$id)->first();
+        $oldroom  = $c->room;
+
+        Room::where('room_num', $request->transfer_room)->update([
+            'avail' => 'NO',
+        ]);
+
+        Room::where('room_num', $oldroom)->update([
+            'avail' => 'YES',
+        ]);
+
+        Customer::where('id',$id)->update([
+            'room' => $request->transfer_room,
+        ]);
+
+        return redirect()->back()->with('success','You transferred room of ' . $c->name);
     }
 }
